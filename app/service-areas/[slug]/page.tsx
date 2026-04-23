@@ -134,9 +134,9 @@ export default async function BeachPage({ params }: Props) {
       </section>
 
       <section className="bg-[var(--color-sand-50)] py-20 sm:py-28">
-        <div className="container-x grid gap-10 lg:grid-cols-[1.2fr_1fr]">
-          <div className="overflow-hidden rounded-[2rem] shadow-xl ring-1 ring-ink-900/10">
-            <div className="flex items-center justify-between gap-3 border-b border-ink-900/10 bg-white px-5 py-4">
+        <div className="container-x grid items-stretch gap-10 lg:grid-cols-[1.2fr_1fr]">
+          <div className="flex min-h-[520px] flex-col overflow-hidden rounded-[2rem] shadow-xl ring-1 ring-ink-900/10 lg:min-h-0">
+            <div className="flex flex-none items-center justify-between gap-3 border-b border-ink-900/10 bg-white px-5 py-4">
               <div>
                 <p className="eyebrow">Satellite View</p>
                 <p className="mt-1 text-sm font-semibold text-ink-900">Parking lot at {beach.shortName}</p>
@@ -151,7 +151,7 @@ export default async function BeachPage({ params }: Props) {
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
               </a>
             </div>
-            <div className="relative aspect-[4/3] bg-ink-900/5">
+            <div className="relative flex-1 bg-ink-900/5">
               <iframe
                 title={`Satellite view of ${beach.fullName} parking`}
                 src={mapEmbed}
@@ -161,7 +161,7 @@ export default async function BeachPage({ params }: Props) {
                 allowFullScreen
               />
             </div>
-            <div className="border-t border-ink-900/10 bg-white px-5 py-4 text-xs text-ink-800/70">
+            <div className="flex-none border-t border-ink-900/10 bg-white px-5 py-4 text-xs text-ink-800/70">
               <strong className="text-ink-900">Parking address:</strong> {beach.parkingAddress} · <span>{beach.lat.toFixed(5)}, {beach.lng.toFixed(5)}</span>
             </div>
           </div>

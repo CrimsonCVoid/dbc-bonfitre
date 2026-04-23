@@ -446,8 +446,33 @@ export function getBeach(slug: string) {
   return BEACHES.find((b) => b.slug === slug);
 }
 
+/**
+ * Top-down satellite embed using Google's official `/maps/embed?pb=` format.
+ *
+ * The pb string encodes:
+ *   1d500      distance (~500m viewport → zoom ~19)
+ *   2d{lng}    longitude
+ *   3d{lat}    latitude
+ *   2m3!1f0!2f0!3f0   bearing=0, tilt=0, roll=0 (guaranteed top-down)
+ *   3m2!1i1024!2i768  viewport pixels
+ *   4f13.1     heading/FOV
+ *   5e1        map type: 1 = satellite (0=map, 1=satellite, 2=hybrid)
+ *
+ * Switched from the simpler `maps.google.com/maps?t=k&output=embed` URL
+ * because that one lets Google decide on 3D tilt; this pb=-format forces
+ * a strict 2D top-down view at every location.
+ */
 export function googleMapsSatelliteEmbed(lat: number, lng: number) {
-  return `https://maps.google.com/maps?q=${lat},${lng}&z=19&t=k&hl=en&output=embed`;
+  const pb =
+    `!1m14!1m12!1m3` +
+    `!1d500` +
+    `!2d${lng}` +
+    `!3d${lat}` +
+    `!2m3!1f0!2f0!3f0` +
+    `!3m2!1i1024!2i768` +
+    `!4f13.1` +
+    `!5e1`;
+  return `https://www.google.com/maps/embed?pb=${pb}`;
 }
 
 export function googleMapsDirectionsLink(lat: number, lng: number, label: string) {
@@ -456,5 +481,6 @@ export function googleMapsDirectionsLink(lat: number, lng: number, label: string
 }
 
 export function googleMapsSatelliteLink(lat: number, lng: number) {
-  return `https://www.google.com/maps/@${lat},${lng},19z/data=!3m1!1e3`;
+  // Force top-down satellite (!2e0 = tilt 0) in the "Open in Google Maps" link too.
+  return `https://www.google.com/maps/@${lat},${lng},19z/data=!3m1!1e3!4m2!2e0`;
 }
