@@ -126,9 +126,10 @@ html body [id*="fh-lightframe"]:not([id*="backdrop"]):not([id*="close"]),
 html body [class*="fh-modal"],
 html body #fh-simple-iframe {
   max-width: 920px !important;
-  max-height: 88vh !important;
+  max-height: 78vh !important;
+  overscroll-behavior: contain !important;
   width: calc(100vw - 40px) !important;
-  margin: 6vh auto !important;
+  margin: 11vh auto !important;
   border-radius: 32px !important;
   overflow: hidden !important;
   background: var(--color-sand-50) !important;
@@ -138,6 +139,29 @@ html body #fh-simple-iframe {
     0 0 0 1px rgba(255, 255, 255, 0.08) inset,
     0 1px 0 0 rgba(255, 255, 255, 0.6) inset !important;
   animation: fh-scale-in 0.36s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Iframe fills the wrapper; FareHarbor's UI handles scroll internally. */
+html body iframe[src*="fareharbor.com"] {
+  height: 100% !important;
+  width: 100% !important;
+  max-height: 78vh !important;
+  overscroll-behavior: contain !important;
+}
+
+/* Lock body scroll while any FareHarbor Lightframe element is on the page.
+   The script toggles these ids/classes on open/close; :has() lets the body
+   react without any JS we write ourselves. */
+html:has(#fh-lightframe),
+html:has([class*="fh-lightframe-backdrop"]),
+html:has(#fh-lightframe-backdrop) {
+  overflow: hidden !important;
+}
+body:has(#fh-lightframe),
+body:has([class*="fh-lightframe-backdrop"]),
+body:has(#fh-lightframe-backdrop) {
+  overflow: hidden !important;
+  touch-action: none !important;
 }
 
 /* The FareHarbor iframe — kill border, inherit big radius */
