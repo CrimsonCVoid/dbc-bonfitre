@@ -21,8 +21,6 @@ export const SITE = {
     facebook: "https://facebook.com/Destin-Bonfire-Company-100088117208761",
     instagram: "https://instagram.com/destin_bonfire_company",
   },
-  booking:
-    "https://fareharbor.com/embeds/book/destinbonfirecompany/?full-items=yes&language=en-us&u=6c9d4aed-4337-42f0-a465-d02502aa4167&from-ssl=yes&g4=no&a=yes&back=https://destinbonfirecompany.com/",
   hours: {
     days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
     opens: "09:00",
