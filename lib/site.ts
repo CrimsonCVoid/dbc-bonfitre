@@ -31,6 +31,9 @@ export const SITE = {
 export const FAREHARBOR = {
   // Must match the subdomain slug shown in the FareHarbor dashboard URL.
   shortname: "destinbonfirecompany",
+  // Customer UUID from the original Duda embed URL. Used as the `u=` param
+  // on every booking URL so FareHarbor tracks the source correctly.
+  customerUuid: "6c9d4aed-4337-42f0-a465-d02502aa4167",
   // Public Lightframe booking URL (this is the one the autolightframe script
   // intercepts — visiting it directly without the script shows the public
   // booking picker, NOT the staff dashboard).
@@ -50,9 +53,35 @@ export const FAREHARBOR = {
 
 export type FareHarborItemKey = keyof typeof FAREHARBOR.items;
 
+/**
+ * Build a FareHarbor Lightframe URL for a specific item (or the generic
+ * picker if no key provided).
+ *
+ * URL params match the proven Duda embed URL with one addition:
+ *   - asn=yes      advance the calendar to the next available date
+ *                  (fixes the "calendar mostly grayed-out past days" UX
+ *                  when the current month has few remaining open dates)
+ *   - full-items=yes  show complete item details
+ *   - language=en-us  localize
+ *   - u=UUID       customer tracking
+ *   - from-ssl=yes mark the source as SSL
+ *   - back=...     return URL after booking
+ *   - flow=no      prevent the Flow multi-step wrapper from stacking
+ *                  on top of the Lightframe modal
+ */
 export function fareHarborItemUrl(key?: FareHarborItemKey): string {
-  if (!key) return FAREHARBOR.fallbackUrl;
-  return `${FAREHARBOR.fallbackUrl}items/${FAREHARBOR.items[key]}/`;
+  const base = key
+    ? `${FAREHARBOR.fallbackUrl}items/${FAREHARBOR.items[key]}/`
+    : FAREHARBOR.fallbackUrl;
+  const params = new URLSearchParams({
+    asn: "yes",
+    "full-items": "yes",
+    language: "en-us",
+    u: FAREHARBOR.customerUuid,
+    "from-ssl": "yes",
+    back: "https://destinbonfirecompany.com/",
+  });
+  return `${base}?${params.toString()}`;
 }
 
 export type Package = {
