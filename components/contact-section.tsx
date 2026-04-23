@@ -1,5 +1,6 @@
 import { ContactForm } from "./contact-form";
 import { SITE } from "@/lib/site";
+import { BookNowButton } from "./book-now-button";
 
 export function ContactSection() {
   return (
@@ -52,9 +53,7 @@ export function ContactSection() {
             </div>
           </dl>
 
-          <a href={SITE.booking} target="_blank" rel="noreferrer" className="btn-primary mt-10">
-            Book Your Bonfire Online
-          </a>
+          <BookNowButton className="mt-10">Book Your Bonfire Online</BookNowButton>
         </div>
 
         <ContactForm />

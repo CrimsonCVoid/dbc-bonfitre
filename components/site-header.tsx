@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { SITE } from "@/lib/site";
+import { BookNowButton } from "./book-now-button";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -66,9 +67,17 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href={SITE.phoneHref} className="btn-primary">
+          <a
+            href={SITE.phoneHref}
+            className={`text-sm font-semibold tracking-wide transition ${
+              scrolled
+                ? "text-ink-900 hover:text-[var(--color-ember-600)]"
+                : "text-white hover:text-[var(--color-sand-100)]"
+            }`}
+          >
             {SITE.phone}
           </a>
+          <BookNowButton>Book Now</BookNowButton>
         </div>
 
         <button
@@ -128,9 +137,9 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <a href={SITE.booking} target="_blank" rel="noreferrer" className="btn-primary mt-6">
+          <BookNowButton className="mt-6" onClick={() => setOpen(false)}>
             Book Your Bonfire
-          </a>
+          </BookNowButton>
           <a href={SITE.phoneHref} className="btn-ghost mt-3">
             Call {SITE.phone}
           </a>

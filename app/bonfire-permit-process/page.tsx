@@ -4,10 +4,34 @@ import { ContactSection } from "@/components/contact-section";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Bonfire Permit Process — Walton County & 30A",
+  title: "Bonfire Permit Process on 30A",
   description:
-    "How bonfire permits work on 30A and Walton County beaches. Timing, second-choice beaches, special event permits, and what is included in our booking.",
+    "How bonfire permits work on 30A, Destin, and Walton County beaches. Timing, second-choice beaches, special event permits, and what’s included in our booking.",
   alternates: { canonical: "/bonfire-permit-process" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: SITE.name,
+    url: `${SITE.domain}/bonfire-permit-process`,
+    title: "Bonfire Permit Process on 30A | Destin Bonfire Company",
+    description:
+      "How bonfire permits work on 30A, Destin, and Walton County beaches. Timing, second-choice beaches, special event permits, and what’s included in our booking.",
+    images: [
+      {
+        url: "/images/IMG_0684.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Permitted 30A beach bonfire at sunset",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bonfire Permit Process on 30A | Destin Bonfire Company",
+    description:
+      "How bonfire permits work on 30A, Destin, and Walton County beaches. Timing, second-choice beaches, special event permits, and what’s included in our booking.",
+    images: ["/images/IMG_0684.jpeg"],
+  },
 };
 
 const STEPS = [
@@ -125,6 +149,31 @@ export default function PermitPage() {
                 <p className="mt-3 text-sm leading-relaxed text-ink-800/80">{f.a}</p>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20 sm:py-28">
+        <div className="container-x mx-auto max-w-3xl">
+          <p className="eyebrow">A Transparent Process</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            No permit markup, no processing fees
+          </h2>
+          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-ink-800/85 sm:text-base">
+            <p>
+              All permit fees are set by Walton County and paid directly to
+              them — we do not mark up or profit from permit costs in any way.
+              We also do not add any admin or processing fees to your permit
+              purchase.
+            </p>
+            <p>
+              Our role is to manage the process, handle the logistics, and make
+              sure everything is done properly so your group doesn’t have to
+              worry about the details. Beach bonfires are not permitted within
+              Destin city limits (Okaloosa County); permitted bonfires are
+              allowed on select beaches in Walton County including Miramar
+              Beach, Santa Rosa Beach, and along 30A.
+            </p>
           </div>
         </div>
       </section>

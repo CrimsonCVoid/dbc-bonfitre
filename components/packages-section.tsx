@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { PACKAGES, SITE } from "@/lib/site";
+import { PACKAGES } from "@/lib/site";
+import { BookNowButton } from "./book-now-button";
 
 export function PackagesSection() {
   return (
@@ -69,18 +70,14 @@ export function PackagesSection() {
                   )}
                 </ul>
 
-                <a
-                  href={SITE.booking}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`mt-7 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-wider transition ${
-                    p.popular
-                      ? "bg-[var(--color-ember-500)] text-white hover:bg-[var(--color-ember-600)]"
-                      : "border border-ink-900/15 text-ink-900 hover:border-[var(--color-ember-500)] hover:bg-[var(--color-ember-500)] hover:text-white"
-                  }`}
+                <BookNowButton
+                  item={p.fareHarborKey}
+                  variant={p.popular ? "primary" : "ghost"}
+                  fullWidth
+                  className="mt-7"
                 >
                   Book {p.name}
-                </a>
+                </BookNowButton>
               </div>
             </article>
           ))}

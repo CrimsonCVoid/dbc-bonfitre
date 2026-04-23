@@ -2,13 +2,38 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHeader } from "@/components/page-header";
 import { ContactSection } from "@/components/contact-section";
+import { BookNowButton } from "@/components/book-now-button";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Bachelorette Bonfires on 30A & Destin | Custom Packages",
+  title: "30A & Destin Bachelorette Bonfires",
   description:
-    "Custom bachelorette beach bonfires on 30A starting at $595 for up to 12 guests. Welcome signs, florals, photography, and more add-ons available.",
+    "Host a fun, private bachelorette beach bonfire near Destin and along 30A. Pink themes, seating, s’mores, fire attendant, and full cleanup included. Book your unforgettable night.",
   alternates: { canonical: "/bachelorette-bonfire" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: SITE.name,
+    url: `${SITE.domain}/bachelorette-bonfire`,
+    title: "30A & Destin Bachelorette Bonfires | Destin Bonfire Company",
+    description:
+      "Host a fun, private bachelorette beach bonfire near Destin and along 30A. Pink themes, seating, s’mores, fire attendant, and full cleanup included. Book your unforgettable night.",
+    images: [
+      {
+        url: "/images/IMG_0398-640w.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Bachelorette party celebrating at a private beach bonfire",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "30A & Destin Bachelorette Bonfires | Destin Bonfire Company",
+    description:
+      "Host a fun, private bachelorette beach bonfire near Destin and along 30A. Pink themes, seating, s’mores, fire attendant, and full cleanup included. Book your unforgettable night.",
+    images: ["/images/IMG_0398-640w.jpg"],
+  },
 };
 
 const INCLUDED = [
@@ -52,7 +77,7 @@ export default function BachelorettePage() {
     <>
       <PageHeader
         eyebrow="Bachelorette Bonfires"
-        title="The perfect beach night for the bride-to-be"
+        title="Bachelorette Bonfire"
         subtitle="Private, fully hosted bonfires on 30A starting at $595 for up to 12 guests. We bring the sign, the chairs, the fire, and the vibes — you bring the bridal party."
         image="/images/IMG_0398-640w.jpg"
       />
@@ -71,7 +96,7 @@ export default function BachelorettePage() {
           <div>
             <p className="eyebrow">Experiences from $595</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
-              Every detail handled — just show up and celebrate
+              The perfect beach night for the bride-to-be
             </h2>
             <p className="mt-5 text-lg text-ink-800/80">
               Bachelorette bonfires include a custom welcome sign, premium
@@ -89,9 +114,9 @@ export default function BachelorettePage() {
                 </li>
               ))}
             </ul>
-            <a href={SITE.booking} target="_blank" rel="noreferrer" className="btn-primary mt-10">
-              Book Bachelorette Bonfire
-            </a>
+            <BookNowButton item="bacheloretteBash" className="mt-10">
+              Book Your Bachelorette Bonfire
+            </BookNowButton>
           </div>
         </div>
       </section>
@@ -115,6 +140,38 @@ export default function BachelorettePage() {
                 <p className="mt-2 text-sm text-ink-800/75">{a.detail}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20 sm:py-28">
+        <div className="container-x mx-auto max-w-3xl">
+          <p className="eyebrow text-center">Destin &amp; 30A Bachelorette</p>
+          <h2 className="mt-3 text-center text-3xl font-semibold tracking-tight sm:text-4xl">
+            Plan the perfect 30A bachelorette weekend
+          </h2>
+          <div className="mt-10 space-y-5 text-[15px] leading-relaxed text-ink-800/85 sm:text-base">
+            <p>
+              Planning a bachelorette trip to Destin or 30A? Celebrate with a
+              styled beach bonfire experience that goes beyond the traditional
+              setup. Designed for groups visiting Destin and 30A, this
+              all-inclusive experience transforms a classic beach bonfire into
+              a photo-ready celebration with coordinated décor, thoughtful
+              details, and a memorable atmosphere for your bride tribe.
+            </p>
+            <p>
+              Our bachelorette beach bonfires are hosted on permitted South
+              Walton beaches — Santa Rosa Beach, Rosemary Beach, Seaside, and
+              along 30A. After a day exploring Rosemary Beach, Seaside, or
+              Santa Rosa Beach, gathering around the fire for s’mores, music,
+              and sunset views creates the perfect ending to the night.
+            </p>
+            <p>
+              Our team handles everything — permits, setup, styling, hosting,
+              and cleanup — so your group can simply arrive, relax, and enjoy
+              the night together. Spring and summer 30A bachelorette weekends
+              book quickly, so we recommend reserving your date early.
+            </p>
           </div>
         </div>
       </section>

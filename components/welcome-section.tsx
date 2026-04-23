@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SITE } from "@/lib/site";
+import { BookNowButton } from "./book-now-button";
 
 export function WelcomeSection() {
   return (
@@ -58,9 +59,7 @@ export function WelcomeSection() {
             </p>
 
             <div className="flex flex-col gap-3 pt-4 sm:flex-row">
-              <a href={SITE.booking} target="_blank" rel="noreferrer" className="btn-primary">
-                Book Your Bonfire
-              </a>
+              <BookNowButton>Book Your Bonfire</BookNowButton>
               <a href="#packages" className="btn-ghost">
                 See Packages
               </a>

@@ -6,3 +6,15 @@ out
 *.log
 .vercel
 next-env.d.ts
+logs/
+
+# Large unreferenced media moved out of public/ — kept locally, not tracked
+unused-assets/
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
+
+# ffmpeg two-pass encode leftovers
+ffmpeg2pass-*.log*
+
+

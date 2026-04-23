@@ -10,8 +10,8 @@ import { Gallery } from "@/components/gallery";
 import { ContactSection } from "@/components/contact-section";
 import { FAQ, PACKAGES, SERVICE_AREAS, SITE } from "@/lib/site";
 
+// Title comes from layout metadata.title.default
 export const metadata: Metadata = {
-  title: "Beach Bonfires Near Destin & 30A | Private, All-Inclusive Setup",
   description: SITE.description,
   alternates: { canonical: "/" },
 };

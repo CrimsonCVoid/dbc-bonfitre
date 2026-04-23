@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/lib/site";
+import { BookNowButton } from "./book-now-button";
 
 export function SiteFooter() {
   return (
@@ -50,6 +51,7 @@ export function SiteFooter() {
             <li><Link className="hover:text-[var(--color-ember-400)]" href="/#service-areas">Areas We Serve</Link></li>
             <li><Link className="hover:text-[var(--color-ember-400)]" href="/#faq">FAQ</Link></li>
             <li><Link className="hover:text-[var(--color-ember-400)]" href="/refund-policy">Refund Policy</Link></li>
+            <li><Link className="hover:text-[var(--color-ember-400)]" href="/refund-policy#privacy-policy">Privacy Policy</Link></li>
           </ul>
         </div>
 
@@ -75,14 +77,7 @@ export function SiteFooter() {
               Mon–Fri · 9:00 AM – 6:00 PM
             </li>
           </ul>
-          <a
-            href={SITE.booking}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-primary mt-6"
-          >
-            Book Your Bonfire
-          </a>
+          <BookNowButton className="mt-6">Book Your Bonfire</BookNowButton>
         </div>
       </div>
 

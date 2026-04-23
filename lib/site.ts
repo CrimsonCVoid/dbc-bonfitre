@@ -6,10 +6,10 @@ export const SITE = {
     "Professionally hosted beach bonfires near Destin and along 30A with permits, seating, s’mores, and cleanup included. Perfect for bachelorettes and families.",
   phone: "(850) 706-1325",
   phoneHref: "tel:+18507061325",
-  email: "erik@destincartcompany.com",
-  emailHref: "mailto:erik@destincartcompany.com",
+  email: "bookings@destinbonfirecompany.com",
+  emailHref: "mailto:bookings@destinbonfirecompany.com",
   address: {
-    street: "34990 Emerald Coast Pkwy",
+    street: "34990 Emerald Coast Pkwy Suite #344",
     city: "Destin",
     region: "FL",
     postal: "32541",
@@ -30,6 +30,30 @@ export const SITE = {
   },
 } as const;
 
+export const FAREHARBOR = {
+  // Must match the subdomain slug shown in the FareHarbor dashboard URL.
+  shortname: "destinbonfirecompany",
+  fallbackUrl: "https://fareharbor.com/destinbonfirecompany/",
+  items: {
+    cozyBonfire: "434338",
+    sunsetCircle: "723755",
+    shorelineSocial: "723756",
+    bonfireBash: "723757",
+    // NOTE: Owner initially provided the same ID (596813) for both the
+    // "Styled Bachelorette" and "Bachelorette Bash" listings. Treated as one
+    // item here. If FareHarbor shows them as two separate items, split this
+    // entry and update the packages/bachelorette page mappings.
+    bacheloretteBash: "596813",
+  },
+} as const;
+
+export type FareHarborItemKey = keyof typeof FAREHARBOR.items;
+
+export function fareHarborItemUrl(key?: FareHarborItemKey): string {
+  if (!key) return FAREHARBOR.fallbackUrl;
+  return `${FAREHARBOR.fallbackUrl}items/${FAREHARBOR.items[key]}/`;
+}
+
 export type Package = {
   slug: string;
   name: string;
@@ -40,6 +64,7 @@ export type Package = {
   popular?: boolean;
   image: string;
   includes: string[];
+  fareHarborKey: FareHarborItemKey;
 };
 
 export const PACKAGES: Package[] = [
@@ -51,6 +76,7 @@ export const PACKAGES: Package[] = [
     duration: "2 hours",
     tagline: "Perfect for couples and small groups looking for a relaxed beach night",
     image: "/images/IMG_0674.jpeg",
+    fareHarborKey: "cozyBonfire",
     includes: [
       "Private beach bonfire setup",
       "2 hour fire",
@@ -75,6 +101,7 @@ export const PACKAGES: Package[] = [
     tagline: "Our most popular option for families and small groups",
     popular: true,
     image: "/images/IMG_0684.jpeg",
+    fareHarborKey: "sunsetCircle",
     includes: [
       "Private beach bonfire setup",
       "2 hour fire",
@@ -98,6 +125,7 @@ export const PACKAGES: Package[] = [
     duration: "3 hours",
     tagline: "Great for celebrations and larger group gatherings",
     image: "/images/IMG_2426.jpeg",
+    fareHarborKey: "shorelineSocial",
     includes: [
       "Private beach bonfire setup",
       "3 hour fire",
@@ -121,6 +149,7 @@ export const PACKAGES: Package[] = [
     duration: "3 hours",
     tagline: "Ideal for big events and unforgettable group nights",
     image: "/images/IMG_0673.jpeg",
+    fareHarborKey: "bonfireBash",
     includes: [
       "Private beach bonfire setup",
       "3 hour fire",
@@ -271,8 +300,8 @@ export const GALLERY = [
   { src: "/images/IMG_0674.jpeg", alt: "Sunset beach bonfire with lounge chairs" },
   { src: "/images/IMG_0684.jpeg", alt: "Guests gathered around an evening beach fire" },
   { src: "/images/IMG_0673.jpeg", alt: "Beach bonfire setup with tiki torches" },
-  { src: "/images/IMG_0398.jpg", alt: "Bachelorette beach bonfire with bride" },
-  { src: "/images/IMG_1146.jpg", alt: "Gulf Coast beach bonfire at twilight" },
+  { src: "/images/IMG_0398-640w.jpg", alt: "Bachelorette beach bonfire with bride and bridal party" },
+  { src: "/images/IMG_1146-640w.jpg", alt: "Emerald Coast beach bonfire at twilight" },
   { src: "/images/IMG_2426.jpeg", alt: "Evening bonfire with seating circle" },
   { src: "/images/IMG_2429.jpeg", alt: "Bonfire with welcome sign on the sand" },
   { src: "/images/IMG_7995-640w.jpg", alt: "Group enjoying s’mores by the fire" },

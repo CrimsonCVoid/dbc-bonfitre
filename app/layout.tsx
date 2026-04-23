@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Fraunces, Inter } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -165,6 +166,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(localBusinessJsonLd),
           }}
+        />
+        <Script
+          src="https://fareharbor.com/embeds/api/v1/?autolightframe"
+          strategy="afterInteractive"
         />
       </body>
     </html>

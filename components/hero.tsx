@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { BookNowButton } from "./book-now-button";
 
 export function Hero() {
   return (
@@ -14,7 +15,8 @@ export function Hero() {
         className="absolute inset-0 -z-20 h-full w-full object-cover"
         aria-hidden="true"
       >
-        <source src="/media/home-banner.mp4" type="video/mp4" />
+        <source src="/videos/hero-optimized.webm" type="video/webm" />
+        <source src="/videos/hero-optimized.mp4" type="video/mp4" />
       </video>
       <div
         className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-900/70 via-ink-900/40 to-ink-900/80"
@@ -24,8 +26,8 @@ export function Hero() {
       <div className="container-x relative flex min-h-[92vh] flex-col items-center justify-center py-32 text-center text-white">
         <p className="eyebrow text-[var(--color-ember-400)]">Destin · 30A · Emerald Coast</p>
         <h1 className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          All-Inclusive Beach Bonfires
-          <span className="block text-[var(--color-ember-400)]">Near Destin &amp; 30A</span>
+          All-Inclusive Beach Bonfire Experiences
+          <span className="block text-[var(--color-ember-400)]">near Destin &amp; 30A</span>
         </h1>
         <p className="mt-8 max-w-2xl text-balance text-base leading-relaxed text-sand-100 sm:text-lg">
           Private, professionally hosted bonfires on permitted Emerald Coast
@@ -34,14 +36,9 @@ export function Hero() {
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-          <a
-            href={SITE.booking}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-primary text-base"
-          >
+          <BookNowButton className="text-base">
             Book Your Bonfire
-          </a>
+          </BookNowButton>
           <a href={SITE.phoneHref} className="btn-secondary text-base">
             Call {SITE.phone}
           </a>

@@ -5,6 +5,7 @@ import { SERVICE_AREAS } from "@/lib/site";
 export function ServiceAreas() {
   return (
     <section id="service-areas" className="bg-[var(--color-sand-100)] py-24 sm:py-32">
+      <span id="AREASWESERVE" className="sr-only" aria-hidden="true" />
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
           <p className="eyebrow">Areas We Serve</p>

@@ -2,13 +2,38 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHeader } from "@/components/page-header";
 import { ContactSection } from "@/components/contact-section";
-import { PACKAGES, SITE } from "@/lib/site";
+import { BookNowButton } from "@/components/book-now-button";
+import { FAREHARBOR, PACKAGES, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Beach Bonfire Packages & Pricing on 30A",
   description:
-    "Compare our four all-inclusive beach bonfire packages on 30A. Includes permit, setup, seating, tiki torches, s’mores, and cleanup for groups of 6 to 29 guests.",
+    "Compare our four all-inclusive beach bonfire packages near Destin and 30A. Permit, setup, seating, tiki torches, s’mores, fire attendant, and cleanup included.",
   alternates: { canonical: "/bonfire-packages" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: SITE.name,
+    url: `${SITE.domain}/bonfire-packages`,
+    title: "Beach Bonfire Packages & Pricing on 30A | Destin Bonfire Company",
+    description:
+      "Compare our four all-inclusive beach bonfire packages near Destin and 30A. Permit, setup, seating, tiki torches, s’mores, fire attendant, and cleanup included.",
+    images: [
+      {
+        url: "/images/IMG_0684.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Private beach bonfire package setup on 30A",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Beach Bonfire Packages & Pricing on 30A | Destin Bonfire Company",
+    description:
+      "Compare our four all-inclusive beach bonfire packages near Destin and 30A. Permit, setup, seating, tiki torches, s’mores, fire attendant, and cleanup included.",
+    images: ["/images/IMG_0684.jpeg"],
+  },
 };
 
 export default function PackagesPage() {
@@ -43,7 +68,7 @@ export default function PackagesPage() {
           price: p.price.toString(),
           priceCurrency: "USD",
           availability: "https://schema.org/InStock",
-          url: `${SITE.domain}/bonfire-packages#${p.slug}`,
+          url: `${FAREHARBOR.fallbackUrl}items/${FAREHARBOR.items[p.fareHarborKey]}/`,
         },
       },
     })),
@@ -57,6 +82,38 @@ export default function PackagesPage() {
         subtitle="Four fully hosted packages for every group size — from quiet couples' nights to large family celebrations. Permit, setup, and cleanup always included."
       />
 
+      <section className="bg-white py-16 sm:py-20">
+        <div className="container-x mx-auto max-w-4xl">
+          <div className="text-center">
+            <p className="eyebrow">Why Choose Destin Bonfire Company</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Transparent pricing, no surprises
+            </h2>
+          </div>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+            {[
+              "No admin or processing fees when you book directly with us",
+              "No permit fee mark-ups — fees are paid directly to Walton County",
+              "Flexible rescheduling before the permit is purchased",
+              "Everything included — no surprise add-on fees for the Bluetooth speaker, food table, cornhole, or s’mores",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex gap-3 rounded-2xl bg-[var(--color-sand-50)] p-5 text-[15px] text-ink-800/90"
+              >
+                <span
+                  className="mt-0.5 text-lg leading-none"
+                  aria-hidden="true"
+                >
+                  🔥
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className="bg-[var(--color-sand-50)] py-20 sm:py-28">
         <div className="container-x space-y-24">
           {PACKAGES.map((p, i) => (
@@ -65,6 +122,19 @@ export default function PackagesPage() {
               id={p.slug}
               className="scroll-mt-24 grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]"
             >
+              <span
+                id={
+                  p.slug === "cozy-fire"
+                    ? "TheCozyFire"
+                    : p.slug === "sunset-circle"
+                      ? "TheSunsetCircle"
+                      : p.slug === "shoreline-social"
+                        ? "TheShorelineSocial"
+                        : "TheBonfireBash"
+                }
+                className="sr-only"
+                aria-hidden="true"
+              />
               <div
                 className={`relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-xl ${
                   i % 2 === 1 ? "lg:order-last" : ""
@@ -103,12 +173,51 @@ export default function PackagesPage() {
                     </li>
                   ))}
                 </ul>
-                <a href={SITE.booking} target="_blank" rel="noreferrer" className="btn-primary mt-10">
+                <BookNowButton item={p.fareHarborKey} className="mt-10">
                   Book {p.name}
-                </a>
+                </BookNowButton>
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="bg-white py-20 sm:py-28">
+        <div className="container-x mx-auto max-w-4xl">
+          <div className="text-center">
+            <p className="eyebrow">Enhancements</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Add-ons &amp; larger groups
+            </h2>
+            <p className="mt-4 text-ink-800/80">
+              S’mores are always included. Customize your bonfire with extras,
+              or ask about custom setups for wedding welcome parties, family
+              reunions, corporate events, birthdays, and women’s retreats.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            {[
+              { name: "Extra hour", price: "$100", detail: "Extend the fire for a longer evening." },
+              { name: "Cooler with ice", price: "$40", detail: "Ice cooler ready for your drinks." },
+              { name: "Extra beach chair", price: "$20", detail: "Add additional seating per guest." },
+            ].map((e) => (
+              <div
+                key={e.name}
+                className="rounded-2xl bg-[var(--color-sand-50)] p-6 shadow-sm ring-1 ring-ink-900/5"
+              >
+                <h3 className="text-lg font-semibold">{e.name}</h3>
+                <p className="mt-1 text-2xl font-bold text-[var(--color-ember-600)]">{e.price}</p>
+                <p className="mt-2 text-sm text-ink-800/75">{e.detail}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-center text-sm text-ink-800/70">
+            Hosting 30 or more guests? Call{" "}
+            <a href={SITE.phoneHref} className="font-semibold text-[var(--color-ember-600)] underline-offset-4 hover:underline">
+              {SITE.phone}
+            </a>{" "}
+            to speak with our event planner about custom bonfires for larger groups.
+          </p>
         </div>
       </section>
 

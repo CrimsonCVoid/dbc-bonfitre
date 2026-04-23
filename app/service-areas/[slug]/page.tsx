@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ContactSection } from "@/components/contact-section";
+import { BookNowButton } from "@/components/book-now-button";
 import {
   BEACHES,
   getBeach,
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const beach = getBeach(slug);
   if (!beach) return {};
   const title = `${beach.fullName} Bonfires | ${beach.community}`;
-  const description = `Private beach bonfires at ${beach.fullName} in ${beach.community}. Parking, restrooms, facilities, and what to know before your Walton County bonfire.`;
+  const description = `Private beach bonfires at ${beach.fullName} in ${beach.community}. ${beach.bestFor} Parking, restrooms, facilities, and what to know before your Walton County bonfire.`;
   return {
     title,
     description,
@@ -123,9 +124,7 @@ export default async function BeachPage({ params }: Props) {
               {beach.vibe}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={SITE.booking} target="_blank" rel="noreferrer" className="btn-primary">
-                Book a Bonfire Here
-              </a>
+              <BookNowButton>Book a Bonfire at {beach.shortName}</BookNowButton>
               <a href={directions} target="_blank" rel="noreferrer" className="btn-secondary">
                 Get Directions
               </a>

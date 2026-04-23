@@ -1,0 +1,69 @@
+import type { AnchorHTMLAttributes, ReactNode } from "react";
+import {
+  FAREHARBOR,
+  fareHarborItemUrl,
+  type FareHarborItemKey,
+} from "@/lib/site";
+
+type Variant = "primary" | "secondary" | "ghost";
+
+type BookNowButtonProps = Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  "href" | "children"
+> & {
+  /** Which FareHarbor item to open. Omit to open the generic item picker. */
+  item?: FareHarborItemKey;
+  /** Matches the site's existing .btn-* utilities. */
+  variant?: Variant;
+  /** If true, the button fills its container width. */
+  fullWidth?: boolean;
+  /** Visible label. */
+  children?: ReactNode;
+};
+
+/**
+ * "Book Now" anchor that the FareHarbor autolightframe script (loaded in
+ * app/layout.tsx) intercepts, opening the booking flow in a modal overlay.
+ *
+ * Without JavaScript it degrades to a plain link to the FareHarbor URL,
+ * which is an acceptable fallback.
+ */
+export function BookNowButton({
+  item,
+  variant = "primary",
+  fullWidth = false,
+  className = "",
+  children = "Book Now",
+  "aria-label": ariaLabel,
+  ...rest
+}: BookNowButtonProps) {
+  const variantClass =
+    variant === "secondary"
+      ? "btn-secondary"
+      : variant === "ghost"
+        ? "btn-ghost"
+        : "btn-primary";
+
+  const classes = [
+    variantClass,
+    fullWidth ? "w-full" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  // TODO post-launch: fire GA4/Meta conversion event on click (dataLayer push)
+
+  return (
+    <a
+      href={fareHarborItemUrl(item)}
+      data-fh-customer-id={FAREHARBOR.shortname}
+      data-fh-flow
+      aria-label={ariaLabel ?? (typeof children === "string" ? undefined : "Book a beach bonfire")}
+      className={classes}
+      {...rest}
+    >
+      {children}
+    </a>
+  );
+}
