@@ -31,7 +31,10 @@ export const SITE = {
 export const FAREHARBOR = {
   // Must match the subdomain slug shown in the FareHarbor dashboard URL.
   shortname: "destinbonfirecompany",
-  fallbackUrl: "https://fareharbor.com/destinbonfirecompany/",
+  // Public Lightframe booking URL (this is the one the autolightframe script
+  // intercepts — visiting it directly without the script shows the public
+  // booking picker, NOT the staff dashboard).
+  fallbackUrl: "https://fareharbor.com/embeds/book/destinbonfirecompany/",
   items: {
     cozyBonfire: "434338",
     sunsetCircle: "723755",

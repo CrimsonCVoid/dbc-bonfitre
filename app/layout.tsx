@@ -174,7 +174,7 @@ export default function RootLayout({
           and data-fh-flow matching the shortname, opens them in a modal.
         */}
         <Script
-          src="https://fareharbor.com/embeds/api/v1/?autolightframe"
+          src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
           strategy="afterInteractive"
         />
       </body>
