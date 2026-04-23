@@ -1,0 +1,96 @@
+import Image from "next/image";
+import { PACKAGES, SITE } from "@/lib/site";
+
+export function PackagesSection() {
+  return (
+    <section id="packages" className="relative bg-[var(--color-sand-50)] py-24 sm:py-32">
+      <div className="container-x">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow">Book a Bonfire</p>
+          <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+            Bonfire Packages
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-ink-800/80">
+            Every package is fully hosted and all-inclusive. Permit, setup,
+            chairs, tiki torches, s’mores, and cleanup — all handled by our
+            team so your group can relax from the first spark to the last ember.
+          </p>
+        </div>
+
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {PACKAGES.map((p) => (
+            <article
+              key={p.slug}
+              className={`group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-ink-900/5 transition hover:-translate-y-1 hover:shadow-xl ${
+                p.popular ? "ring-2 ring-[var(--color-ember-500)]" : ""
+              }`}
+            >
+              {p.popular && (
+                <div className="absolute right-5 top-5 z-10 rounded-full bg-[var(--color-ember-500)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white shadow">
+                  Most Popular
+                </div>
+              )}
+              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-sand-200)]">
+                <Image
+                  src={p.image}
+                  alt={`${p.name} — beach bonfire package`}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="text-2xl font-semibold">{p.name}</h3>
+                <p className="mt-1 text-sm text-ink-800/70">{p.tagline}</p>
+
+                <div className="mt-5 flex items-baseline gap-2">
+                  <span className="text-4xl font-bold tracking-tight text-[var(--color-ember-600)]">
+                    ${p.price}
+                  </span>
+                </div>
+                <p className="text-xs uppercase tracking-wider text-ink-800/60">
+                  {p.groupSize} · {p.duration}
+                </p>
+
+                <ul className="mt-6 flex-1 space-y-2.5 text-sm text-ink-800/90">
+                  {p.includes.slice(0, 6).map((item) => (
+                    <li key={item} className="flex gap-2.5">
+                      <svg className="mt-0.5 h-4 w-4 flex-none text-[var(--color-ember-500)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                  {p.includes.length > 6 && (
+                    <li className="pt-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-ember-600)]">
+                      + {p.includes.length - 6} more included
+                    </li>
+                  )}
+                </ul>
+
+                <a
+                  href={SITE.booking}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`mt-7 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-wider transition ${
+                    p.popular
+                      ? "bg-[var(--color-ember-500)] text-white hover:bg-[var(--color-ember-600)]"
+                      : "border border-ink-900/15 text-ink-900 hover:border-[var(--color-ember-500)] hover:bg-[var(--color-ember-500)] hover:text-white"
+                  }`}
+                >
+                  Book {p.name}
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p className="mt-10 text-center text-sm text-ink-800/60">
+          Pricing includes the $157 Walton County permit fee. 18% gratuity
+          applies to The Bonfire Bash.
+        </p>
+      </div>
+    </section>
+  );
+}

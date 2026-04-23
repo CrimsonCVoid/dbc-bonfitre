@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sand-50: #fdfaf3;
+  --color-sand-100: #f7efde;
+  --color-sand-200: #ece0c4;
+  --color-sand-300: #d8c49a;
+
+  --color-ember-400: #f2a261;
+  --color-ember-500: #e07a3a;
+  --color-ember-600: #c45a22;
+  --color-ember-700: #9a3e11;
+
+  --color-gulf-400: #6aa7c6;
+  --color-gulf-500: #3b7fa3;
+  --color-gulf-600: #285d7d;
+  --color-gulf-700: #17405c;
+
+  --color-ink-900: #1a1614;
+  --color-ink-800: #2a2421;
+
+  --font-display: "Fraunces", "Noto Serif", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-sand-50);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-ember-500);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-ember-500)] px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-lg shadow-ember-500/20 transition hover:bg-[var(--color-ember-600)] hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ember-500)] focus-visible:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/70 bg-white/10 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur transition hover:bg-white hover:text-[var(--color-ink-900)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-ember-500)] px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-[var(--color-ember-700)] transition hover:bg-[var(--color-ember-500)] hover:text-white;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-ember-600)];
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
