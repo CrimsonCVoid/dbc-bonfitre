@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Fraunces, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
@@ -161,15 +161,24 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(localBusinessJsonLd),
           }}
         />
-        <Script
+        {/*
+          FareHarbor Lightframe — intercepts anchors with href matching
+          fareharbor.com/destinbonfirecompany/ and opens them in a modal.
+          Using a plain <script async> (not next/script) so it's present in
+          the initial server-rendered HTML and browser-parsed on first paint.
+          That eliminates the race window where a click before hydration
+          would fall through to native navigation.
+        */}
+        <script
+          async
           src="https://fareharbor.com/embeds/api/v1/?autolightframe"
-          strategy="afterInteractive"
         />
       </body>
     </html>

@@ -1,9 +1,5 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
-import {
-  FAREHARBOR,
-  fareHarborItemUrl,
-  type FareHarborItemKey,
-} from "@/lib/site";
+import { fareHarborItemUrl, type FareHarborItemKey } from "@/lib/site";
 
 type Variant = "primary" | "secondary" | "ghost";
 
@@ -25,7 +21,13 @@ type BookNowButtonProps = Omit<
  * "Book Now" anchor that the FareHarbor autolightframe script (loaded in
  * app/layout.tsx) intercepts, opening the booking flow in a modal overlay.
  *
- * Without JavaScript it degrades to a plain link to the FareHarbor URL,
+ * The autolightframe script finds every anchor with an href matching
+ * `fareharbor.com/{shortname}/` and attaches a click handler that opens
+ * the URL in an iframe modal. No extra data-* attributes are needed —
+ * and `data-fh-flow` in particular is for a DIFFERENT FareHarbor product
+ * (Flow) that would cause the click to fall through to native navigation.
+ *
+ * Without JavaScript this degrades to a plain link to the FareHarbor URL,
  * which is an acceptable fallback.
  */
 export function BookNowButton({
@@ -57,8 +59,6 @@ export function BookNowButton({
   return (
     <a
       href={fareHarborItemUrl(item)}
-      data-fh-customer-id={FAREHARBOR.shortname}
-      data-fh-flow
       aria-label={ariaLabel ?? (typeof children === "string" ? undefined : "Book a beach bonfire")}
       className={classes}
       {...rest}
