@@ -77,3 +77,129 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
+
+/* ==========================================================================
+   FareHarbor Lightframe modal — visual overhaul
+
+   The booking UI itself renders inside FareHarbor's iframe (served from
+   fareharbor.com, outside our origin — we can't style its contents).
+   What we CAN restyle is the wrapper container, backdrop, iframe border,
+   and close button that FareHarbor injects into our DOM when the modal
+   opens. Targeting several class / id patterns because FareHarbor doesn't
+   publish a stable class contract; using !important to beat the inline
+   styles their script sets.
+   ========================================================================== */
+
+@keyframes fh-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fh-scale-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Backdrop — darker + blurred for a more modal feel */
+html body #fh-lightframe-backdrop,
+html body [class*="fh-lightframe-backdrop"],
+html body [class*="fh-backdrop"],
+html body div[data-fh-lightframe-backdrop],
+html body #fh-simple-iframe-backdrop {
+  background: rgba(20, 16, 14, 0.78) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  animation: fh-fade-in 0.22s ease-out !important;
+}
+
+/* Modal wrapper — smaller max size, rounded, soft shadow, centered */
+html body #fh-lightframe,
+html body [class*="fh-lightframe"]:not([class*="backdrop"]):not([class*="close"]):not([class*="loading"]),
+html body [id*="fh-lightframe"]:not([id*="backdrop"]):not([id*="close"]),
+html body [class*="fh-modal"],
+html body #fh-simple-iframe {
+  max-width: 960px !important;
+  max-height: 92vh !important;
+  width: calc(100vw - 32px) !important;
+  margin: 4vh auto !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.55),
+    0 16px 32px -16px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+  animation: fh-scale-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  background: #fff !important;
+}
+
+/* The FareHarbor iframe — kill its default border and round with the wrapper */
+html body iframe[src*="fareharbor.com"] {
+  border: 0 !important;
+  border-radius: 20px !important;
+  display: block !important;
+}
+
+/* Close button — larger tap target, ember accent, better shadow */
+html body [class*="fh-lightframe-close"],
+html body [id*="fh-lightframe-close"],
+html body button[aria-label*="Close" i][data-fh-close],
+html body a[class*="fh-close"],
+html body div[class*="fh-close"] {
+  width: 44px !important;
+  height: 44px !important;
+  top: 14px !important;
+  right: 14px !important;
+  border-radius: 9999px !important;
+  background: #fff !important;
+  color: var(--color-ink-900) !important;
+  border: 0 !important;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(0, 0, 0, 0.06) !important;
+  font-size: 18px !important;
+  line-height: 44px !important;
+  text-align: center !important;
+  transition: transform 0.15s ease, background 0.15s ease !important;
+  z-index: 2147483647 !important;
+}
+html body [class*="fh-lightframe-close"]:hover,
+html body [id*="fh-lightframe-close"]:hover,
+html body button[aria-label*="Close" i][data-fh-close]:hover,
+html body a[class*="fh-close"]:hover {
+  background: var(--color-ember-500) !important;
+  color: #fff !important;
+  transform: scale(1.06) !important;
+}
+
+/* Loading state — match brand color instead of FareHarbor blue */
+html body [class*="fh-lightframe-loading"] svg circle,
+html body [class*="fh-lightframe-loading"] path {
+  stroke: var(--color-ember-500) !important;
+  fill: var(--color-ember-500) !important;
+}
+
+/* Mobile — edge-to-edge feels better at small widths */
+@media (max-width: 640px) {
+  html body #fh-lightframe,
+  html body [class*="fh-lightframe"]:not([class*="backdrop"]):not([class*="close"]):not([class*="loading"]),
+  html body [id*="fh-lightframe"]:not([id*="backdrop"]):not([id*="close"]) {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    max-height: 100vh !important;
+    margin: 0 !important;
+    border-radius: 16px 16px 0 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  html body iframe[src*="fareharbor.com"] {
+    border-radius: 16px 16px 0 0 !important;
+    height: 92vh !important;
+  }
+  html body [class*="fh-lightframe-close"],
+  html body [id*="fh-lightframe-close"] {
+    top: 10px !important;
+    right: 10px !important;
+  }
+}
